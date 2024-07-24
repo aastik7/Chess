@@ -10,7 +10,7 @@ const io = socket(server);
 
 const chess = new Chess(); // Chess engine Rules
 let players = {};
-let currentPlayer = "W"; // W for white side player
+let currentPlayer = "w"; // W for white side player
 
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "public")));
@@ -20,17 +20,19 @@ app.get("/", (req, res) => {
 });
 
 io.on("connection", function (uniquesocket) {
-  console.log("Connected");
+  console.log("New client connected");
 
   if (!players.white) {
     players.white = uniquesocket.id;
-    uniquesocket.emit("PlayerRole:", "w");
-  } else if (players.black) {
+    uniquesocket.emit("PlayerRole", "w");
+    console.log("Assigned white to", uniquesocket.id);
+  } else if (!players.black) {
     players.black = uniquesocket.id;
     uniquesocket.emit("PlayerRole", "b");
+    console.log("Assigned black to", uniquesocket.id);
   } else {
     uniquesocket.emit("spectatorRole");
-    uniquesocket.on("disconnect", function () {});
+    console.log("Assigned spectator role to", uniquesocket.id);
   }
 
   uniquesocket.on("disconnet", function () {

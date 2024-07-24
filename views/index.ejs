@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Chess Game</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
     <style>
       .chessboard {
         display: grid;
@@ -47,12 +48,8 @@
         cursor: pointer;
       }
 
-      .piece.draggable {
+      .piece[draggable="true"] {
         cursor: grab;
-      }
-
-      .dragging {
-        opacity: 0.5;
       }
 
       /* Rotate pieces for black player */
@@ -63,9 +60,7 @@
   </head>
   <body>
     <div class="w-full h-screen flex items-center justify-center bg-zinc-900">
-      <div class="chessboard w-96 h-96 bg-red-400">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
-      </div>
+      <div class="chessboard w-96 h-96 bg-red-400"></div>
     </div>
 
     <script

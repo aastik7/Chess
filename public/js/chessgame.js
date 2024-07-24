@@ -4,9 +4,10 @@ const boardElement = document.querySelector(".chessboard");
 
 let draggedPiece = null;
 let sourceSquare = null;
-let playerRole = null;
+let playerRole = "w";
 
 const renderBoard = () => {
+  console.log("Rendering board. Current player role:", playerRole);
   const board = chess.board();
   boardElement.innerHTML = "";
   board.forEach((row, rowindex) => {
@@ -30,14 +31,27 @@ const renderBoard = () => {
         pieceElement.draggable = playerRole === square.color;
 
         pieceElement.addEventListener("dragstart", (e) => {
+          console.log("Drag start", {
+            playerRole: playerRole,
+            pieceColor: square.color,
+            isDraggable: pieceElement.draggable,
+          });
           if (pieceElement.draggable) {
             draggedPiece = pieceElement;
             sourceSquare = { row: rowindex, col: squareindex };
-            e.dataTransfer.setData("text/plain", ""); //Reducing issues with drag
+            e.dataTransfer.setData("text/plain", "");
+            setTimeout(() => pieceElement.classList.add("dragging"), 0);
+          } else {
+            console.log("Piece not draggable");
+            e.preventDefault();
           }
         });
 
         pieceElement.addEventListener("dragend", (e) => {
+          console.log("Drag end");
+          if (draggedPiece) {
+            draggedPiece.classList.remove("dragging");
+          }
           draggedPiece = null;
           sourceSquare = null;
         });
@@ -102,6 +116,7 @@ const getPieceUnicode = (piece) => {
 };
 
 socket.on("PlayerRole", function (role) {
+  console.log("Received player role:", role);
   playerRole = role;
   renderBoard();
 });
