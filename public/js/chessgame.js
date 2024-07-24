@@ -13,12 +13,12 @@ const renderBoard = () => {
     row.forEach((square, squareindex) => {
       const squareElement = document.createElement("div");
       squareElement.classList.add(
-        "sqaure",
+        "square",
         (rowindex + squareindex) % 2 === 0 ? "light" : "dark"
       );
 
       squareElement.dataset.row = rowindex;
-      squareElement.dataset.col = square;
+      squareElement.dataset.col = squareindex;
 
       if (square) {
         const pieceElement = document.createElement("div");
@@ -29,14 +29,38 @@ const renderBoard = () => {
         pieceElement.innerText = "";
         pieceElement.draggable = playerRole === square.color;
 
-        pieceElement.addEventListener("dragstart", () => {
+        pieceElement.addEventListener("dragstart", (e) => {
           if (pieceElement.draggable) {
             draggedPiece = pieceElement;
             sourceSquare = { row: rowindex, col: squareindex };
             e.dataTransfer.setData("text/plain", ""); //Reducing issues with drag
           }
         });
+
+        pieceElement.addEventListener("dragend", (e) => {
+          draggedPiece = null;
+          sourceSquare = null;
+        });
+
+        squareElement.appendChild(pieceElement);
       }
+
+      squareElement.addEventListener("dragover", function (e) {
+        e.preventDefault();
+      });
+
+      squareElement.addEventListener("drop", function (e) {
+        e.preventDefault();
+        if (draggedPiece) {
+          const targetSquare = {
+            row: parseInt(squareElement.dataset.row),
+            col: parseInt(squareElement.dataset.col),
+          };
+
+          handleMove(sourceSquare, targetSquare);
+        }
+      });
+      boardElement?.appendChild(squareElement);
     });
   });
 };
