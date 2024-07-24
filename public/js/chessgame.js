@@ -1,6 +1,3 @@
 const socket = io();
-
-socket.emit("hey");
-socket.on("Good Morning", function () {
-  console.log("Good Morning received");
-});
+const chess = new Chess();
+const boardElement = document.querySelector(".chessboard");
