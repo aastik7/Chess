@@ -24,12 +24,13 @@ io.on("connection", function (uniquesocket) {
 
   if (!players.white) {
     players.white = uniquesocket.id;
-    uniquesocket.emit();
+    uniquesocket.emit("PlayerRole:", "w");
   } else if (players.black) {
     players.black = uniquesocket.id;
     uniquesocket.emit("PlayerRole", "b");
   } else {
-    uniquesocket.emit("spectaterRole");
+    uniquesocket.emit("spectatorRole");
+    uniquesocket.on("disconnect", function () {});
   }
 
   uniquesocket.on("disconnet", function () {
@@ -42,8 +43,8 @@ io.on("connection", function (uniquesocket) {
 
   uniquesocket.on("move", (move) => {
     try {
-      if (chess.turn() === "w" && socket.id !== players.white) return;
-      if (chess.turn() === "b" && socket.id !== players.black) return;
+      if (chess.turn() === "w" && uniquesocket.id !== players.white) return;
+      if (chess.turn() === "b" && uniquesocket.id !== players.black) return;
 
       const result = chess.move(move);
       if (result) {
@@ -52,12 +53,12 @@ io.on("connection", function (uniquesocket) {
         io.emit("boardState", chess.fen());
       } else {
         console.log("Invalid move : ", move);
-        uniquesocket.emit("Invalid Move ", move);
+        uniquesocket.emit("invalidMove", move);
       }
     } catch (err) {
       console.log(err);
       console.log("Invadid move: ", move);
-      uniquesocket.emit("Invalid move: ", move);
+      uniquesocket.emit("invalidMove", move);
     }
   });
 });
