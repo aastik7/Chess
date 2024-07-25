@@ -10,11 +10,11 @@
         display: grid;
         grid-template-columns: repeat(8, minmax(0, 1fr));
         grid-template-rows: repeat(8, minmax(0, 1fr));
-        width: 80vmin; /* Increased size, using viewport units */
-        height: 80vmin; /* Increased size, using viewport units */
-        max-width: 800px; /* Maximum width */
-        max-height: 800px; /* Maximum height */
-        margin: auto; /* Center the board */
+        width: 80vmin;
+        height: 80vmin;
+        max-width: 800px;
+        max-height: 800px;
+        margin: auto;
         transform: rotate(0deg);
       }
 
@@ -46,8 +46,10 @@
       }
 
       .piece {
-        font-size: 4vmin; /* Increased size, using viewport units */
+        font-size: 8vmin; /* Increased from 4vmin to 8vmin */
+        line-height: 1; /* Ensure the piece is centered vertically */
         cursor: pointer;
+        user-select: none; /* Prevent text selection */
       }
 
       .piece.draggable {
@@ -61,6 +63,13 @@
       /* Rotate pieces for black player */
       .flipped .piece {
         transform: rotate(180deg);
+      }
+
+      /* Media query for larger screens */
+      @media (min-width: 1000px) {
+        .piece {
+          font-size: 80px; /* Fixed size for larger screens */
+        }
       }
     </style>
   </head>
