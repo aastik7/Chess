@@ -52,3 +52,28 @@ You can try the game by clicking the button below. Share the link with a friend 
 
 ``cd Chess``
 
+3. Install dependencies:
+
+``npm install``
+
+4. Start the server:
+
+``npm start``
+
+5. Open your browser and visit `http://localhost:3000`
+
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome! Feel free to check [issues page](https://github.com/aastik7/Chess/issues).
+
+## 📜 License
+
+This project is [MIT](https://choosealicense.com/licenses/mit/) licensed.
+
+## 👏 Acknowledgements
+
+- [Chess.js](https://github.com/jhlywa/chess.js)
+- [Socket.IO](https://socket.io/)
+- [Express.js](https://expressjs.com/)
+
