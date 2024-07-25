@@ -12,6 +12,8 @@ const chess = new Chess(); // Chess engine Rules
 let players = {};
 let currentPlayer = "w"; // W for white side player
 
+const PORT = process.env.PORT || 3000;
+
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -35,7 +37,8 @@ io.on("connection", function (uniquesocket) {
     console.log("Assigned spectator role to", uniquesocket.id);
   }
 
-  uniquesocket.on("disconnet", function () {
+  uniquesocket.on("disconnect", function () {
+    // Corrected the typo here
     if (uniquesocket.id === players.white) {
       delete players.white;
     } else if (uniquesocket.id === players.black) {
@@ -59,12 +62,12 @@ io.on("connection", function (uniquesocket) {
       }
     } catch (err) {
       console.log(err);
-      console.log("Invadid move: ", move);
+      console.log("Invalid move: ", move);
       uniquesocket.emit("invalidMove", move);
     }
   });
 });
 
-server.listen(3000, function () {
-  console.log("listening on port 3000");
+server.listen(PORT, function () {
+  console.log(`listening on port ${PORT}`);
 });
