@@ -10,7 +10,7 @@ Welcome to our real-time, multiplayer Chess game! Challenge your friends or rand
 
 You can try the game by clicking the button below. Share the link with a friend to start a game together!
 
-[![Try the Chess Game](https://img.shields.io/badge/Try%20the%20Chess%20Game-absolute--dona--aastik--e9c3e0d5.koyeb.app-green)](https://absolute-dona-aastik-e9c3e0d5.koyeb.app/)
+[![Play The Chess Game](https://img.shields.io/badge/Try%20the%20Chess%20Game-absolute--dona--aastik--e9c3e0d5.koyeb.app-green)](https://absolute-dona-aastik-e9c3e0d5.koyeb.app/)
 
 1. Click the button to open the game.
 2. Share the link with another person to play together.
