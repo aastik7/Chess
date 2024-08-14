@@ -12,7 +12,7 @@ You can try the game by clicking the button below. Share the link with a friend 
 
 # Chess Game
 
-[![Play Chess](https://img.shields.io/badge/Play%20Chess-00C853?style=for-the-badge&logo=chess)](https://your-chess-game-link.com)
+[![Play Chess](https://img.shields.io/badge/Play%20Chess-00C853?style=for-the-badge&logo=chess)](https://absolute-dona-aastik-e9c3e0d5.koyeb.app/)
 
 # Chess Game
 
